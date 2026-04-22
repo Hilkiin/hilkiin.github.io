@@ -1,0 +1,427 @@
+/* Yleinen tyyli */
+body {
+    background-color: #1a1a1a;
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero + FPS parallax */
+.hero {
+    height: 100vh;
+    background-image: url("bg.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(calc(var(--parallaxX) * 1px), calc(var(--parallaxY) * 1px)) scale(1.1);
+    transition: transform 0.1s linear;
+    will-change: transform;
+}
+
+/* Hero-otsikot */
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.hero-title .main {
+    font-size: 4.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px black, 0 0 20px black;
+        color: white;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.336),
+        0 0 16px rgba(255, 255, 255, 0.479),
+        0 0 32px rgba(255, 255, 255, 0.199),
+        0 0 48px rgba(255, 255, 255, 0.404);
+}
+
+.hero-title .sub {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    opacity: 0.85;
+    max-width: 700px;
+    text-shadow:
+        0 0 6px black,
+        0 0 12px black,
+        0 0 18px rgba(0,0,0,0.8),
+        0 0 26px rgba(0,0,0,0.9);
+        
+}
+
+/* Scroll-liike alas */
+body.title-down .hero-title {
+    transform: translate(-50%, 200px);
+}
+
+/* Haihtuminen pois */
+body.title-hidden .hero-title {
+    opacity: 0;
+}
+
+/* Sisältö */
+.sub-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.596),
+        0 0 16px rgba(255, 255, 255, 0.479),
+        0 0 32px rgba(255, 255, 255, 0.199),
+        0 0 48px rgba(255, 255, 255, 0.329);
+}
+
+.content {
+    padding: 60px;
+    text-align: center;
+    transform: translateY(200px);
+    opacity: 0;
+    transition: all 1s ease-out;
+}
+
+body.scrolled .content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Keskitetty laatikko */
+.single-box {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.single-box .box {
+    background-color: #222;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.single-box .box h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.single-box .box p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+/* Kaksi saraketta */
+.two-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.two-columns .column {
+    flex: 1;
+    background-color: #222;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.two-columns .column h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.two-columns .column p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+.two-columns .column {
+    background-color: #222;
+    padding: 20px 25px;
+    border-radius: 8px;
+    color: #ddd;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.two-columns .column:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    color: white;
+    }
+
+/* Mobiili */
+@media (max-width: 800px) {
+    .two-columns {
+        flex-direction: column;
+    }
+}
+/* Skele-kuvan hehkuva reunus */
+.content img {
+    border-radius: 12px;
+    padding: 8px;
+
+    /* Punainen hehku + keltainen ylävasen */
+    box-shadow:
+        -10px -10px 10px rgba(255, 255, 0, 0.9),   /* keltainen ylävasen */
+        10px -10px 20px rgba(255, 0, 0, 0.8),      /* punainen yläoikea */
+        -10px 10px 20px rgba(255, 0, 0, 0.8),      /* punainen alavasen */
+        10px 10px 20px rgba(255, 0, 0, 0.8);       /* punainen alaoikea */
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Skele-kuvan hehkuva reunus (pienempi versio) */
+.content img {
+    border-radius: 12px;
+    padding: 6px;
+
+    box-shadow:
+        -6px -6px 12px rgba(255, 255, 0, 0.9),   /* keltainen ylävasen */
+        6px -6px 12px rgba(255, 0, 0, 0.8),      /* punainen yläoikea */
+        -6px 6px 12px rgba(255, 0, 0, 0.8),      /* punainen alavasen */
+        6px 6px 12px rgba(255, 0, 0, 0.8);       /* punainen alaoikea */
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover-efekti: kuva nousee ja varjo voimistuu */
+.content img:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        -8px -8px 18px rgba(255, 255, 0, 1),     /* kirkkaampi keltainen */
+        8px -8px 18px rgba(255, 0, 0, 1),        /* kirkkaampi punainen */
+        -8px 8px 18px rgba(255, 0, 0, 1),
+        8px 8px 18px rgba(255, 0, 0, 1),
+        0 0 25px rgba(255, 0, 0, 0.5);           /* lisähehku */
+}
+/* Ominaisuuslaatikot */
+.features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 60px 20px;
+}
+
+.feature-box {
+    background-color: #222;
+    padding: 20px 30px;
+    border-radius: 8px;
+    color: #ddd;
+    font-size: 1.2rem;
+    text-align: center;
+    min-width: 220px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover-efekti */
+.feature-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(255,0,0,0.4);
+    color: white;
+}
+/* Ominaisuuslaatikot – pienempi koko ja 2+3 layout */
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Viimeinen rivi: 3 laatikkoa */
+.features .feature-box:nth-child(n+3) {
+    grid-column: span 1;
+}
+
+.features .feature-box:nth-child(3) {
+    grid-column: 1 / 2;
+}
+
+.features .feature-box:nth-child(4) {
+    grid-column: 2 / 3;
+}
+
+.features .feature-box:nth-child(5) {
+    grid-column: 1 / 3;
+}
+
+/* Laatikon tyyli */
+.feature-box {
+    background-color: #222;
+    padding: 20px 25px;
+    border-radius: 8px;
+    color: #ddd;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover-efekti */
+.feature-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    color: white;
+}
+
+/* Mobiili: kaikki allekkain */
+@media (max-width: 700px) {
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+/* Hover-efekti myös Uusin tuotteemme -laatikolle */
+.single-box .box {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+.single-box .box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    color: white;
+}
+/* Sticky header – smooth liuku */
+.top-header {
+    position: absolute;
+    top: 100vh; /* hero-kuvan alareuna */
+    left: 0;
+    width: 100%;
+    background-color: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.3rem;
+    color: white;
+    z-index: 999;
+
+    /* Smooth liike */
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Kun sticky, header liukuu ylös */
+.top-header.sticky {
+    position: fixed;
+    top: 0;
+    transform: translateY(0);
+    box-shadow: 0 0 20px rgba(255,0,0,0.4);
+}
+
+/* Kun EI sticky, header pysyy hero-kuvan alareunassa */
+.top-header:not(.sticky) {
+    transform: translateY(0);
+}
+/* Header layout */
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header navigation */
+.header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+.header-nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover efekti */
+.header-nav a:hover {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.25);
+    box-shadow: 0 0 12px rgba(255,0,0,0.4);
+}
+
+/* Mobiili */
+@media (max-width: 700px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-nav {
+        gap: 15px;
+    }
+}
+/* Skele-kuvan FPS parallax */
+.skele-parallax {
+    transform-style: preserve-3d;
+    transition: transform 0.01s linear;
+    will-change: transform;
+}
+/* Alatunniste */
+.footer {
+    background-color: #111;
+    padding: 60px 20px;
+    text-align: center;
+    margin-top: 80px;
+    box-shadow: 0 -5px 20px rgba(255,0,0,0.25);
+}
+
+.footer h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.4),
+        0 0 16px rgba(255, 255, 255, 0.25);
+}
+
+.footer-content p {
+    color: #ccc;
+    font-size: 1.1rem;
+    margin: 8px 0;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+/* Hover-efekti riveille */
+.footer-content p:hover {
+    color: white;
+    text-shadow: 0 0 10px rgba(255,0,0,0.5);
+}
+
+.footer-bottom {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #777;
+}
