@@ -1,0 +1,114 @@
+/* Koko sivun taustaväri ja tekstin väri */
+body {
+    background-color: #1a1a1a; /* tumma harmaa */
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Parallax-taustakuva */
+.hero {
+    height: 100vh;
+    background-image: url("bg.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Hero-otsikot keskelle kuvaa */
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 1.2s ease-out;
+}
+
+/* Pääteksti – ei rivinvaihtoa */
+.hero-title .main {
+    font-size: 4.5rem;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0 0 10px black, 0 0 20px black;
+}
+
+/* Pienempi teksti alle */
+.hero-title .sub {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    opacity: 0.85;
+    text-shadow: 0 0 8px black;
+}
+
+/* Kun scrollataan, tekstit fadeavat sisään */
+body.scrolled .hero-title {
+    opacity: 1;
+}
+
+/* Kun hero-osio poistuu näkyvistä, tekstit fadeavat ulos */
+body.scrolled-far .hero-title {
+    opacity: 0;
+}
+
+/* Alaotsikko */
+.sub-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+/* Sisältö liukuu kuvan päälle */
+.content {
+    padding: 60px;
+    text-align: center;
+
+    transform: translateY(200px);
+    opacity: 0;
+    transition: all 1s ease-out;
+}
+
+body.scrolled .content {
+    transform: translateY(0);
+    opacity: 1;
+}
+/* Kaksi saraketta hero-kuvan alle */
+.two-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Yksittäinen sarake */
+.two-columns .column {
+    flex: 1;
+    background-color: #222; /* hieman vaaleampi kuin tausta */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Otsikot sarakkeissa */
+.two-columns .column h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Teksti sarakkeissa */
+.two-columns .column p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+/* Mobiili: sarakkeet allekkain */
+@media (max-width: 800px) {
+    .two-columns {
+        flex-direction: column;
+    }
+}
